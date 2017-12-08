@@ -45,22 +45,30 @@ $("#submit-button").on("click", function(event){
 
 database.ref().on("child_added", function(childSnapshot, prevChildKey){
     var newChild = childSnapshot.val();
-    var empName = newChild.name;
-    var empRole = newChild.role;
-    var empStart = newChild.start;
-    var empRate = newChild.rate;
-    console.log(empName);
-    console.log(empRole);
-    console.log(empStart);
-    console.log(empRate);
+    var trainName = newChild.name;
+    var trainDestination = newChild.destination;
+    var trainStart = newChild.start;
+    var trainFrequency = newChild.frequency;
+    console.log(trainName);
+    console.log(trainDestination);
+    console.log(trainStart);
+    console.log(trainFrequency);
 
-    var dateFormat="MM/DD/YY";
-    var convertedDate=moment(empStart, dateFormat);
 
-    var totalMonths = (moment(convertedDate).diff(moment(), "months"))*(-1);
+    //need to figure out the format for the time instead of date
+    //check out moment.js docs for the information
+    //try to use unix if it can be used to do formulas with time
+    var timeFormat="H HH";
+    var frequencyFormat="m mm";
+    var convertedTime=moment(trainStart, timeFormat);
+    var convertedFrequency = (trainFrequency, frequencyFormat);
+
+    // var totalMonths = (moment(convertedTime).diff(moment(), "months"))*(-1);
     
-    var totalBilled = totalMonths*empRate;
+    // var nextTrain = 
+
+console.log(convertedTime);
     
-    $("#employeeTable").append(`<tr><td>${empName}</td><td>${empRole}</td><td>${empStart}</td><td>${totalMonths}</td><td>${empRate}</td><td>${totalBilled}</td></tr>`);
+    $("#trainTimes").append(`<tr><td>${trainName}</td><td>${trainDestination}</td><td>${trainStart}</td><td>${trainFrequency}</td></tr>`);
 
 });
