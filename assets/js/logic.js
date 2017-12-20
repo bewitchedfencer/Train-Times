@@ -44,7 +44,7 @@ $("#submit-button").on("click", function (event) {
 
 function updateTrains() {
     $("#trainTimes").empty();
-    database.ref().once("child_added", function (childSnapshot, prevChildKey) {
+    database.ref().on("child_added", function (childSnapshot, prevChildKey) {
         console.log("update trains");
         var newChild = childSnapshot.val();
         var trainName = newChild.name;
